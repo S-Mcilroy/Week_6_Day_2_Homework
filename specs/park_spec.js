@@ -6,10 +6,14 @@ describe('Park', function() {
 
   beforeEach(function () {
     park = new Park("Jurassic Park", 10);
-    dino1 = new Dinosaur("Raptor", "Meat", 10)
-    dino2 = new Dinosaur("T-Rex", "Meat", 50)
-    dino3 = new Dinosaur("Triceratops", "Plant", 100)
-    dino4 = new Dinosaur("Triceratops", "Plant", 50)
+    dino1 = new Dinosaur("Raptor", "Carnivore", 10)
+    dino2 = new Dinosaur("T-Rex", "Carnivore", 50)
+    dino3 = new Dinosaur("Triceratops", "Herbivore", 100)
+    dino4 = new Dinosaur("Triceratops", "Herbivore", 50)
+    dino5 = new Dinosaur("Raptor", "Carnivore", 20)
+    dino6 = new Dinosaur("T-Rex", "Carnivore", 65)
+    dino7 = new Dinosaur("Oviraptor", "Omnivore", 15)
+    dino8 = new Dinosaur("Oviraptor", "Omnivore", 35)
   })
 
   it('should have a name', function() {
@@ -93,6 +97,40 @@ describe('Park', function() {
     const actual = park.totalRevenue();
     const expected = 766500;
     assert.strictEqual(actual, expected);
+  });
+
+// Remove all dinosaurs of a particular species
+// Provide an object containing each of the diet types and the number
+//  of dinosaurs in the park of that diet type
+// Example: { 'carnivore': 5, 'herbivore': 2, 'omnivore': 1 }
+
+  it('should be able to remove all dinosaurs of a particular species', function() {
+        park.addDinosaur(dino1);
+        park.addDinosaur(dino2);
+        park.addDinosaur(dino3);
+        park.addDinosaur(dino4);
+        park.addDinosaur(dino5);
+        park.addDinosaur(dino6);
+        park.addDinosaur(dino7);
+        park.addDinosaur(dino8);
+        park.removeAllSpecies("Triceratops");
+        const actual = park.allSpecies("Triceratops");
+        const expected = [];
+        assert.deepStrictEqual(actual, expected);
+  })
+
+  it('should be able to provide object containing diet types and how many', function() {
+          park.addDinosaur(dino1);
+          park.addDinosaur(dino3);
+          park.addDinosaur(dino8);
+          park.addDinosaur(dino4);
+          park.addDinosaur(dino5);
+          park.addDinosaur(dino7);
+          park.addDinosaur(dino6);
+          park.addDinosaur(dino2);
+          const actual = park.allDietTypes();
+          const expected = {'Carnivore': 4, 'Herbivore': 2, 'Omnivore': 2};
+          assert.deepStrictEqual(actual, expected);
   });
 
 });

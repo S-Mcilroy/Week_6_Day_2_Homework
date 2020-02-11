@@ -48,4 +48,16 @@ Park.prototype.totalRevenue = function () {
   return this.totalVistorsPerYear() * this.ticketPrice
 };
 
+Park.prototype.removeAllSpecies = function (species) {
+     this.collectionOfDinosaurs = this.collectionOfDinosaurs.filter(function(dinosaur){
+         return dinosaur.species != species;
+     });
+  };
+
+Park.prototype.allDietTypes = function() {
+  let counts = {};
+  this.collectionOfDinosaurs.map(function(dinosaur) { counts[dinosaur.diet] = (counts[dinosaur.diet] || 0)+1; });
+  return counts;
+};
+
 module.exports = Park;
